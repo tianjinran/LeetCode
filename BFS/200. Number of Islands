@@ -1,0 +1,49 @@
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function(grid) {  //BFS
+    
+    if(grid.length === 0){
+        return 0;
+    }
+    var res = 0;
+    var queue = [];
+    
+    const h = grid.length //height of the grid
+    const w = grid[0].length // width of the grid
+    
+    for (let i = 0; i < h; i++){
+        for(let j = 0; j < w; j++){
+            if(grid[i][j] == 1){     //spot a 1
+                grid[i][j] = 0 ;  //mark as visited
+                queue.push(i * w + j);
+                res ++;
+                while(queue.length > 0){
+                    let position = queue.shift();
+                    let r = Math.floor(position / w);  //row number
+                    let c = position % w;         // column number
+                if(r > 0 && grid[r-1][c] == 1 ){    //the position above
+                   grid[r-1][c] = 0;                //mark as visited
+                   queue.push((r-1) * w + c);
+                }
+                if(r < h - 1 && grid[r+1][c] == 1){  //the position below
+                    grid[r+1][c] = 0
+                    queue.push((r+1) * w + c);
+                }
+                if(c > 0 && grid[r][c-1] == 1){     //the position left
+                    grid[r][c-1] = 0
+                    queue.push(r * w + (c-1));
+                }
+                if(c < w - 1 && grid[r][c+1] == 1){  //the position right
+                    grid[r][c+1] =0
+                   queue.push(r * w + (c+1));
+                }
+                }
+     
+            }  
+        }
+    }
+    return res
+    
+};
