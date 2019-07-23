@@ -1,0 +1,14 @@
+//1. 将maxsum初始为第一个数
+//2. For loop：a)若为正数，加至后面一个数 
+//             b)后面这个数若大于maxsum，更新maxsum
+
+
+var maxSubArray = function(nums) {
+    len = nums.length;
+    maxSum = nums[0];
+    for (i = 1; i < len; i++){
+        if(nums[i-1] > 0){nums[i] += nums[i-1];}
+        if(maxSum < nums[i]){maxSum = nums[i];}
+    }
+    return maxSum;
+};
