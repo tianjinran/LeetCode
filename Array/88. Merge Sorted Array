@@ -1,0 +1,41 @@
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function(nums1, m, nums2, n) {
+    let count = 0;
+    while(nums1[nums1.length-1] === 0 ){ //Turn all ending zeros to infinite.
+        count++;
+        nums1.pop();
+    }
+    while(count > 0){
+        nums1.push(Number.POSITIVE_INFINITY);
+        count--;
+    }
+    
+    let p1 = 0;
+    let p2 = 0;
+    
+    while(p2 < n){
+
+        if(nums2[p2] < nums1[p1]){        //if p2 is smaller, insert before p1
+            nums1.splice(p1,0,nums2[p2]);
+            nums1.pop();
+            p2++;
+        }else{
+            p1++;
+        }
+    }
+    
+    while(nums1[nums1.length-1] === Number.POSITIVE_INFINITY ){ //Turn infinite back to 0
+        count++;
+        nums1.pop();
+    }
+    while(count > 0){
+        nums1.push(0);
+        count--;
+    }
+};
