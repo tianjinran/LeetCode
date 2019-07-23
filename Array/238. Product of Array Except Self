@@ -18,3 +18,33 @@ var productExceptSelf = function(nums) { //BF . O(n^2)
 };
 
 
+/**
+ * @param {number[]} nums     //O(n) 
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {  // 2 for loops, first left product on the fly, second times res with right product on the fly.
+    const res = []
+    let l = 1
+    let r = 1
+    for (let k = 0 ; k < nums.length; k++){     //res store the left product uptil each point
+        res.push(l *= nums[k])
+    }
+    console.log(res)
+
+    for (let i = nums.length - 1; i >= 0; i--) {
+        
+        if(i){                        //Not first number when i = 0
+            res[i] = r * res[i - 1];  //r is always the right accumulative product coming from right til i+1
+                                    //and res will provide the left accumulative product coming from left til i-1 .
+            console.log(res)
+        }else{                          //first number 
+            res[i] = r;
+            console.log(res)
+        }
+        
+        r *= nums[i]             //accumulate to r
+        console.log(r)
+    }
+    return res
+};
+
