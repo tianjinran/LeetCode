@@ -1,0 +1,13 @@
+var twoSum = function(nums, target) {  //hash table O(n)
+    const map = {};
+    const result = [];
+    const len = nums.length;
+    for(i = 0; i < len; i++){
+        if((target - nums[i]) in map){  //if target value in object
+            result.push(map[target - nums[i]], i); //push the two indexs to result
+            break;
+        }
+        map[nums[i]] = i; //put into object: key = value of current element, value = index of current element.
+    }
+    return result
+}
