@@ -1,0 +1,7 @@
+function reverse(str){   //O(n)
+  result = '';
+  for(i = 0 ; i < str.length; i++){
+    result+=str[str.length-i-1];
+  }
+  return result
+}
