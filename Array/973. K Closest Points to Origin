@@ -1,0 +1,24 @@
+/**
+ * @param {number[][]} points
+ * @param {number} K
+ * @return {number[][]}
+ */
+var kClosest = function(points, K) {     //slow
+    let res = [];
+    //Math.abs(),Math.sqrt(),Math.pow(4, 3); 4*4*4
+    for(let i of points){
+        let dis = Math.sqrt(Math.pow(i[0],2) + Math.pow(i[1],2));
+        i.push(dis);
+    }
+    
+points.sort((b,a)=>a[2]-b[2]); 
+    
+    while(K > 0){
+        res.push(points.pop());
+        res[res.length-1].pop();
+        K--;
+    }
+    
+    return res;
+    
+};
