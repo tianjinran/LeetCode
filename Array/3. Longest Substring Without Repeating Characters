@@ -1,0 +1,60 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) {  /O（n^2）
+    if(s.length <= 1){
+        return s.length;
+    }
+    //const cache = {};
+    let len = s.length;
+    let res= 1;
+    
+    for (let i = 0; i < len ; i++){
+        const cache = {};
+        let p = i;
+        while(!(cache[s[p]]) && p < len){
+            cache[s[p]] = 1;
+            let curLen = p - i + 1;
+            if(curLen > res){
+                res = curLen;
+            }
+            p++;
+        }
+    
+    }
+    return res;
+};
+
+// Sliding window: this window with start index and end index,
+// Algorithm for the window,which is a set: start and end = 0; end ++, if end in set(duplicate): move start to one position infront of the duplicate. start cant go back.
+// and go back to increment end, until they both reach s.length -1. With every increment update max length ever seen.
+
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function(s) { //sliding window
+    if(s.length === 0 ){
+        return 0;
+    }
+    res = 1;
+    let len = s.length;
+    let start = 0; //start index of the window
+    let end = 1; // end index of the window
+    let map = new Map([[s[0],0]]); 
+    while(end < len){   
+        if(map.get(s[end]) || s[end] === s[0]){    //if end already in map (second condition because map.get(x) will always be false                                                      //when the key x's value is 0; 
+            start = Math.max(start,map.get(s[end]) + 1);              //update start to the previous seen end index + 1;
+            map.set(s[end],end)                             //update the value(last seen index of this key).
+            res = Math.max(res,end - start + 1);    //update res, still need because when end sees duplicates before current start, current window still valid.
+            end ++;
+        }else{                                       //end not in map , add end to map as key , its index as value
+            res = Math.max(res,end - start + 1);    //update res
+            map.set(s[end],end);                        //update map
+            end ++;           
+        }
+    }
+    return res;
+};
