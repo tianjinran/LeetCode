@@ -1,0 +1,22 @@
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {  //O(n)
+    let map ={'(':')','[':']','{':'}'}
+    let stack = '';
+    for (let i = 0;i < s.length; i++){
+        if(s[i] in map){   //s[i] is a open
+            stack = stack.concat(s[i])
+        }else{          //s[i] is a close
+            if(s[i] !== map[stack[stack.length-1]]){
+                return false; 
+            }
+            stack = stack.slice(0,stack.length-1)
+        }
+    }
+    if(stack){
+        return false;
+    }
+    return true;
+};
