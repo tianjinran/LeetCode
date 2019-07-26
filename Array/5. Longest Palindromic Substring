@@ -1,0 +1,36 @@
+//forEach letter, set to the center of the palindromic, to pointer to expand and check
+//Do for odd and even
+var longestPalindrome = function(s) { //expand from center with 2 pointer 
+    if(s.length < 2){
+        return s;
+    }
+    let len = s.length;
+    let res = '';
+    // loop for res with odd length
+    for(let i = 0; i < len; i++ ){ //let s[i] be the center of palindrome
+        let j = i;              //j pointer going left while k going right
+        let k = i;
+        while(s[k] === s[j] && k < len && j >= 0){   
+            let temp = s.slice(j,k+1);
+            if(temp.length > res.length){
+                res = temp;
+            }
+            j--;
+            k++;
+        }
+        }
+        //loop for res with even length
+    for(let i = 0; i < len - 1; i++ ){ //let s[i] be the center(left) of palindrome
+        let j = i;              //j pointer going left while k going right
+        let k = i + 1;
+        while(s[k] === s[j] && k < len && j >= 0){   
+                let temp = s.slice(j,k+1);
+                if(temp.length > res.length){
+                    res = temp;
+                }
+                j--;
+                k++;
+            }   
+        }
+    return res;
+    }
