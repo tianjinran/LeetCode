@@ -1,0 +1,62 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {  //Binary Search
+    let minIndex;         //min is the start of the unrotated array;
+    let len = nums.length;
+    let p1 = 0;
+    let p2 = len - 1;
+    let res = 0;
+    while(p2 >= p1){
+        let mid = Math.floor((p2 + p1) / 2);
+        if(nums[mid] > nums[mid + 1]){ 
+            minIndex = mid + 1;
+            break;
+        }
+        if(nums[mid] < nums[mid - 1]){ 
+            minIndex = mid;
+            break;
+        }
+        if(nums[mid] > nums[p1]){  //select rightside
+            p1 = mid + 1;
+        }else{                      //select leftside
+            p2 = mid - 1;
+        }
+    }
+    console.log(minIndex)
+    let left = nums.slice(0,minIndex);
+    let right = nums.slice(minIndex,len);
+    
+    if(target < left[0]){      //target in right
+        let ans = binarySearch(right,target);
+        if(ans === -1){
+            return -1;
+        }
+        res = minIndex + ans;
+    }else{
+        res = binarySearch(left,target);
+    }
+    return res;
+};
+
+function binarySearch(nums,target){
+    let len = nums.length;
+    let res = 0;
+    let p1 = 0;
+    let p2 = len - 1;
+    while(p2 >= p1){
+        let mid = Math.floor((p2 + p1) / 2);
+        if(nums[mid] === target){
+            return mid;
+        }
+        if(nums[mid] < target){
+            p1 = mid + 1;
+        }else{
+            p2 = mid - 1;
+        }
+    }
+    return -1;
+}
+
