@@ -1,0 +1,41 @@
+/**
+ * @param {string[]} logs
+ * @return {string[]}
+ */
+var reorderLogFiles = function(logs) {  // O(nm)
+    let res = [];
+    let len = logs.length;
+    let dArray = [];
+    for(let i = 0; i < len; i++ ){
+        let w = logs[i].split(' ');
+        let c = w[1][0].charCodeAt();                     
+        if(!(c >= 48 && c <= 57 ))  //letter 
+            res.push(logs[i]);
+        else                      //digit
+            dArray.push(logs[i]);
+    }
+    //sort letter
+    res.sort(function(a,b){
+    let A = a.split(' ');
+    let B = b.split(' ');
+        
+    aSub = a.substring(A[0].length);
+    bSub = b.substring(B[0].length);
+            
+    if ( aSub > bSub )
+        return 1;
+    else if ( bSub > aSub )
+        return -1;
+    else
+    if ( A[0] > B[0] )
+        return 1;
+    else if ( B[0] > A[0] )
+        return -1;
+    else
+        return 0;
+    }
+    )
+    
+    res= res.concat(dArray);
+    return res;
+}
