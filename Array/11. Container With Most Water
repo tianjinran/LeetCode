@@ -1,0 +1,25 @@
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) { //2 pointer; 
+    let len = height.length;
+    if(len < 2){
+        return 0;
+    }
+    let res = 0;
+    let l = 0; //left wall index of container;
+    let r = len -1 ;
+    while(r > l){
+        res = Math.max(res, (r - l) * Math.min(height[l],height[r]));        
+        if(height[l] < height[r]){
+            l++;
+        }else if(height[r] < height[l]){
+            r--;
+        }else{
+            r--;
+            l++;
+        }
+    }
+    return res
+};
