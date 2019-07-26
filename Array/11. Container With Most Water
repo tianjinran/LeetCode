@@ -2,6 +2,10 @@
  * @param {number[]} height
  * @return {number}
  */
+ //Algorithm: the area of water is width * height of the short side of the container.
+ //start with left side at first number and right side at last number, we have the maximum width possible.
+ //The only way to get more water is a taller short side, so we move in the short side.
+ //When the two sides same height, the only way to get more water is both side increase, so we pull in both side together.
 var maxArea = function(height) { //2 pointer; 
     let len = height.length;
     if(len < 2){
