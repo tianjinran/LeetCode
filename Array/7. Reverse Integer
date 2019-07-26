@@ -1,0 +1,23 @@
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {   //toString than reverse string
+    var a = Math.pow(2,31)-1; 
+    var b = -Math.pow(2,31);
+    
+    x = x.toString();
+    res = '';
+    if(x < 0){
+        res = res.concat('-'); 
+        x = x.slice(1,);
+    }
+    for(let i = 0; i < x.length; i++){
+        res=res.concat(x[x.length-1-i])
+    }
+    res = Number(res);
+    if((res > a)||(res < b)){
+        return 0;
+    }
+    return res;
+};
