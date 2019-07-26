@@ -1,0 +1,33 @@
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+var groupAnagrams = function(strs) { // NKlogK can be improved
+    if(strs.length === 0){
+        return strs;
+    }
+    let res = [];
+    let copy = {...strs};
+    console.log(copy);
+    //sort each element of strs
+    let cache = {};
+    for(let i = 0; i < strs.length;i++){
+        strs[i] = strs[i].split('');
+        strs[i] = strs[i].sort();
+        strs[i] = strs[i].join('');
+        if(!(strs[i] in cache)){
+            cache[strs[i]] = [i];
+        }else{
+            cache[strs[i]].push(i);
+        }
+    }
+    for(let k in cache){
+        let array = [];
+        for(let j = 0; j < cache[k].length;j++){
+        array.push(copy[cache[k][j]]);
+            
+        }
+        res.push(array);
+    }
+    return res;
+};
