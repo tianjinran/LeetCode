@@ -1,0 +1,23 @@
+//https://leetcode.com/problems/generate-parentheses/solution/
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {           //Backtracking complicate time/space complexity 
+    let res =[];
+    backtrack(res, '',0,0,n);
+    return res
+}
+//open = # of '(' curr has  , close = # of ')' curr has
+function backtrack(res, curr, open, close, n){
+    if(curr.length === n*2){
+        res.push(curr);
+        return;
+    }
+    if(open < n ){       //if # of '(' < n
+    backtrack(res, curr+'(' , open + 1, close, n);    
+    }
+    if(close < open ){       //if # of ')' < # of '(' 
+    backtrack(res, curr+')' , open , close + 1, n);    
+    }
+}
